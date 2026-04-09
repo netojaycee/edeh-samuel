@@ -17,7 +17,7 @@ async function getProjects() {
         id: true,
         title: true,
         slug: true,
-        shortDesc: true,
+        // shortDesc: true,
       },
     });
   } catch {

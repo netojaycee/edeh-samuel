@@ -34,7 +34,7 @@ export async function PUT(
       data: {
         title: data.title,
         slug,
-        shortDesc: data.shortDesc,
+        // shortDesc: data.shortDesc,
         tagline: data.tagline,
         role: data.role,
         industry: data.industry,

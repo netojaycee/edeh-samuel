@@ -8,7 +8,7 @@ interface Project {
   id: string;
   title: string;
   slug: string;
-  shortDesc: string;
+  // shortDesc: string;
 }
 
 interface WorksListProps {
@@ -37,25 +37,25 @@ export function WorksList({ projects }: WorksListProps) {
         whileInView="show"
         viewport={{ once: true }}
         transition={{ staggerChildren: 0.08 }}
-        className="space-y-6"
+        className="space-y-4"
       >
         {projects.map((project) => (
           <motion.li key={project.id} variants={item}>
             <Link
               href={`/works/${project.slug}`}
-              className="group flex items-start gap-1"
+              className="group flex items-center gap-1 text-primary"
             >
-              <span className="text-muted-foreground mr-1 mt-0.5 shrink-0">
-                ·
+              <span className="h-1.5 w-1.5 rounded-full bg-primary">
+                
               </span>
               <div>
-                <span className="font-medium text-foreground group-hover:text-primary transition-colors underline underline-offset-4 decoration-border group-hover:decoration-primary inline-flex items-center gap-1">
+                <span className="font-medium text-foreground group-hover:text-primary/80 text-primary transition-colors underline underline-offset-4 decoration-border group-hover:decoration-primary inline-flex items-center gap-1">
                   {project.title}
-                  <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity -mt-0.5" />
+                  <ArrowUpRight className="w-3.5 h-3.5 -mt-0.5 group-hover:rotate-45 transition-transform" />
                 </span>
-                <span className="text-muted-foreground">
+                {/* <span className="text-muted-foreground">
                   : {project.shortDesc}
-                </span>
+                </span> */}
               </div>
             </Link>
           </motion.li>

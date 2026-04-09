@@ -18,7 +18,6 @@ model Project {
   id        String   @id @default(cuid())
   title     String
   slug      String   @unique
-  shortDesc String
   tagline   String
   role      String
   industry  String

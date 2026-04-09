@@ -24,7 +24,7 @@ export function BottomCTA() {
 
         <Button
           onClick={() => setContactOpen(true)}
-          className="gap-2 rounded px-6"
+          className="gap-2 rounded-lg px-6"
         >
           <Mail className="w-4 h-4" />
           Send me a Mail

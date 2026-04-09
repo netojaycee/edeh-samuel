@@ -45,9 +45,9 @@ export default async function ProjectsPage() {
                   {project.status}
                 </Badge>
               </div>
-              <p className="text-xs text-muted-foreground truncate">
+              {/* <p className="text-xs text-muted-foreground truncate">
                 {project.shortDesc}
-              </p>
+              </p> */}
               <p className="text-xs text-muted-foreground">
                 Order: {project.order} · /works/{project.slug}
               </p>

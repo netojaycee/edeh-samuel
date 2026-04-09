@@ -17,7 +17,7 @@ export default async function EditProjectPage({ params }: Props) {
       project={{
         id: project.id,
         title: project.title,
-        shortDesc: project.shortDesc,
+        // shortDesc: project.shortDesc,
         tagline: project.tagline,
         role: project.role,
         industry: project.industry,

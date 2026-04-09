@@ -21,7 +21,7 @@ interface ProjectFormProps {
   project?: {
     id: string;
     title: string;
-    shortDesc: string;
+    // shortDesc: string;
     tagline: string;
     role: string;
     industry: string;
@@ -38,7 +38,7 @@ export function ProjectForm({ project }: ProjectFormProps) {
 
   const [form, setForm] = useState({
     title: project?.title ?? "",
-    shortDesc: project?.shortDesc ?? "",
+    // shortDesc: project?.shortDesc ?? "",
     tagline: project?.tagline ?? "",
     role: project?.role ?? "",
     industry: project?.industry ?? "",
@@ -102,7 +102,7 @@ export function ProjectForm({ project }: ProjectFormProps) {
           />
         </div>
 
-        <div className="space-y-1.5">
+        {/* <div className="space-y-1.5">
           <Label htmlFor="shortDesc">
             Short Description *{" "}
             <span className="text-muted-foreground font-normal">(shown on landing page)</span>
@@ -116,7 +116,7 @@ export function ProjectForm({ project }: ProjectFormProps) {
             className="resize-none"
             placeholder="A UK-based gifting marketplace..."
           />
-        </div>
+        </div> */}
 
         <div className="space-y-1.5">
           <Label htmlFor="tagline">

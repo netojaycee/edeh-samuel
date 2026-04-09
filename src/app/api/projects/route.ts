@@ -12,7 +12,7 @@ export async function GET() {
         id: true,
         title: true,
         slug: true,
-        shortDesc: true,
+        // shortDesc: true,
         tagline: true,
         role: true,
         industry: true,
@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
       data: {
         title: data.title,
         slug,
-        shortDesc: data.shortDesc,
+        // shortDesc: data.shortDesc,
         tagline: data.tagline,
         role: data.role,
         industry: data.industry,
