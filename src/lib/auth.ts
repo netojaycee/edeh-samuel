@@ -21,12 +21,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
         const valid = await bcrypt.compare(
           credentials.password as string,
-          user.password
+          user.password,
         );
 
         if (!valid) return null;
 
-        return { id: user.id, email: user.email };
+        return { id: user.id, email: user.email, resumeUrl: user.resumeUrl }; // add resumeUrl
       },
     }),
   ],
@@ -34,9 +34,23 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     signIn: "/admin/login",
   },
   session: { strategy: "jwt" },
+  // callbacks: {
+  //   authorized({ auth }) {
+  //     return !!auth?.user;
+  //   },
+  // },
   callbacks: {
-    authorized({ auth }) {
-      return !!auth?.user;
+    jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+        token.resumeUrl = (user as any).resumeUrl; 
+      }
+      return token;
+    },
+    session({ session, token }) {
+      session.user.id = token.id as string;
+      (session.user as any).resumeUrl = token.resumeUrl as string; 
+      return session;
     },
   },
 });

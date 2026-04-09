@@ -6,9 +6,11 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Moon, Sun } from "lucide-react";
 
-export function Navbar() {
+export function Navbar({ resumeUrl }: { resumeUrl?: string }) {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+
+
 
   useEffect(() => {
     setMounted(true);
@@ -22,7 +24,6 @@ export function Navbar() {
       document.getElementById("works")?.scrollIntoView({ behavior: "smooth" });
     }
   };
-
   return (
     <motion.nav
       initial={{ opacity: 0, y: -8 }}
@@ -73,7 +74,7 @@ export function Navbar() {
             Works
           </Link>
           <a
-            href="/resume.pdf"
+            href={resumeUrl || "#"}
             target="_blank"
             rel="noopener noreferrer"
             className="text-muted-foreground hover:text-foreground transition-colors"

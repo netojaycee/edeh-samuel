@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { Resend } from "resend";
+import { auth } from "@/lib/auth";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -115,3 +116,15 @@ export async function POST(req: NextRequest) {
     );
   }
 }
+
+
+// export async function GET() {
+//   try {
+//    const session = await auth();
+//    console.log("Contact GET session:", session);
+//     return NextResponse.json(session);
+//   } catch (error) {
+//     console.error(error);
+//     return NextResponse.json({ error: "Failed to fetch projects" }, { status: 500 });
+//   }
+// }

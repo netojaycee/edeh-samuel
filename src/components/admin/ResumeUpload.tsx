@@ -5,7 +5,13 @@ import { Button } from "@/components/ui/button";
 import { Upload, FileText, Loader2, CheckCircle2 } from "lucide-react";
 import { toast } from "sonner";
 
-export function ResumeUpload({ hasResume }: { hasResume: boolean }) {
+export function ResumeUpload({
+  hasResume,
+  resumeUrl,
+}: {
+  hasResume: boolean;
+  resumeUrl: string;
+}) {
   const [uploading, setUploading] = useState(false);
   const [uploaded, setUploaded] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -45,7 +51,9 @@ export function ResumeUpload({ hasResume }: { hasResume: boolean }) {
     <div className="border border-border rounded-lg p-5 space-y-4">
       <div className="flex items-center gap-2 text-muted-foreground">
         <FileText className="w-4 h-4" />
-        <span className="text-xs uppercase tracking-wider font-medium">Resume</span>
+        <span className="text-xs uppercase tracking-wider font-medium">
+          Resume
+        </span>
       </div>
 
       <div className="flex items-center justify-between">
@@ -53,12 +61,12 @@ export function ResumeUpload({ hasResume }: { hasResume: boolean }) {
           {uploaded
             ? "resume.pdf updated"
             : hasResume
-            ? "resume.pdf exists"
-            : "No resume uploaded yet"}
+              ? "resume.pdf exists"
+              : "No resume uploaded yet"}
         </p>
         {(hasResume || uploaded) && (
           <a
-            href="/resume.pdf"
+            href={resumeUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="text-xs text-primary hover:underline"
@@ -83,7 +91,11 @@ export function ResumeUpload({ hasResume }: { hasResume: boolean }) {
           ) : (
             <Upload className="w-3.5 h-3.5" />
           )}
-          {uploading ? "Uploading..." : hasResume || uploaded ? "Replace Resume" : "Upload Resume"}
+          {uploading
+            ? "Uploading..."
+            : hasResume || uploaded
+              ? "Replace Resume"
+              : "Upload Resume"}
         </Button>
         <input
           ref={fileInputRef}

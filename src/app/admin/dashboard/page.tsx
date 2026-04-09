@@ -19,7 +19,12 @@ export default async function DashboardPage() {
     select: { id: true, title: true, status: true, createdAt: true },
   });
 
-  const hasResume = existsSync(path.join(process.cwd(), "public", "resume.pdf"));
+  const user = await prisma.user.findUnique({
+    where: { email: process.env.ADMIN_EMAIL },
+    select: { resumeUrl: true },
+  });
+  const hasResume = !!user?.resumeUrl;
+
 
   return (
     <div className="p-8">
@@ -64,7 +69,7 @@ export default async function DashboardPage() {
           </Link>
         </div>
 
-        <ResumeUpload hasResume={hasResume} />
+        <ResumeUpload hasResume={hasResume} resumeUrl={user?.resumeUrl || "#"} />
       </div>
 
       {/* Recent projects */}

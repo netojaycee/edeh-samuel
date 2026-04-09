@@ -5,6 +5,7 @@ import { Hero } from "@/components/home/Hero";
 import { WorksList } from "@/components/home/WorksList";
 import { WhatsHappening } from "@/components/home/WhatsHappening";
 import { BottomCTA } from "@/components/home/BottomCTA";
+import NavbarServer from "@/components/layout/NavbarServer";
 
 export const revalidate = 60;
 
@@ -30,7 +31,7 @@ export default async function Home() {
 
   return (
     <>
-      <Navbar />
+      <NavbarServer />
       <main>
         <Hero />
         <WorksList projects={projects} />
