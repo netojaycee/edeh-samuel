@@ -1,10 +1,10 @@
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
-import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ProjectDetail } from "@/components/project/ProjectDetail";
 import { BottomCTA } from "@/components/home/BottomCTA";
 import type { Metadata } from "next";
+import NavbarServer from "@/components/layout/NavbarServer";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -38,7 +38,7 @@ export default async function ProjectPage({ params }: Props) {
 
   return (
     <>
-      <Navbar />
+      <NavbarServer />
       <main>
         <ProjectDetail project={project} />
         <BottomCTA />
