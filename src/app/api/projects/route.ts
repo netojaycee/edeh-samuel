@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import slugify from "slugify";
@@ -51,6 +52,9 @@ export async function POST(req: NextRequest) {
         order: data.order ?? 0,
       },
     });
+
+    revalidatePath("/works");
+    revalidatePath("/admin/projects");
 
     return NextResponse.json(project, { status: 201 });
   } catch (error) {

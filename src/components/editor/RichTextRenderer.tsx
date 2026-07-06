@@ -15,7 +15,7 @@ interface RichTextRendererProps {
 export function RichTextRenderer({ content }: RichTextRendererProps) {
   const editor = useEditor({
     extensions: [
-      StarterKit,
+      StarterKit.configure({ link: false, underline: false }),
       Image.configure({ inline: false }),
       Link.configure({ openOnClick: true }),
       Underline,

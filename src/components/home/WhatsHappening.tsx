@@ -14,7 +14,10 @@ export function WhatsHappening() {
       >
         <h2 className="text-2xl font-semibold">What&apos;s Happening</h2>
 
-        <p className="text-sm text-muted-foreground leading-relaxed">
+<p className="text-sm text-muted-foreground leading-relaxed">
+          Leading design on <strong className="text-foreground font-semibold">Clara Commerce</strong>, a UK software product building the direct alternative to Uber Eats and Deliveroo for independent restaurants. I'm building the design system from the ground up to scale as the product expands.
+        </p>
+        {/* <p className="text-sm text-muted-foreground leading-relaxed">
           currently, i am working with{" "}
           <strong className="text-foreground font-semibold">Futurtech Dev</strong>{" "}
           on the design and development of a fintech platform focused on helping
@@ -29,7 +32,7 @@ export function WhatsHappening() {
           environments where i can contribute to building thoughtful,
           research-driven digital products that balance user needs with business
           growth.
-        </p>
+        </p> */}
       </motion.div>
     </section>
   );

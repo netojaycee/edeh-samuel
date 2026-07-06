@@ -22,11 +22,15 @@ export function DeleteProjectButton({
 
     try {
       const res = await fetch(`/api/projects/${id}`, { method: "DELETE" });
-      if (!res.ok) throw new Error("Failed");
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.detail || data.error || "Failed");
+      }
       toast.success("Project deleted");
-      router.refresh();
-    } catch {
-      toast.error("Failed to delete project");
+      router.push("/admin/projects");
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Failed to delete project";
+      toast.error(message);
     } finally {
       setLoading(false);
     }

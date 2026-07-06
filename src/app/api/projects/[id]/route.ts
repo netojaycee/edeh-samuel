@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import slugify from "slugify";
@@ -12,7 +13,8 @@ export async function GET(
     const project = await prisma.project.findUnique({ where: { id } });
     if (!project) return NextResponse.json({ error: "Not found" }, { status: 404 });
     return NextResponse.json(project);
-  } catch {
+  } catch (error) {
+    console.error("GET /api/projects/[id]:", error);
     return NextResponse.json({ error: "Failed to fetch project" }, { status: 500 });
   }
 }
@@ -45,8 +47,13 @@ export async function PUT(
       },
     });
 
+    revalidatePath(`/works/${project.slug}`);
+    revalidatePath("/works");
+    revalidatePath("/admin/projects");
+
     return NextResponse.json(project);
-  } catch {
+  } catch (error) {
+    console.error("PUT /api/projects/[id]:", error);
     return NextResponse.json({ error: "Failed to update project" }, { status: 500 });
   }
 }
@@ -60,9 +67,23 @@ export async function DELETE(
 
   const { id } = await params;
   try {
+    const project = await prisma.project.findUnique({
+      where: { id },
+      select: { slug: true },
+    });
+
     await prisma.project.delete({ where: { id } });
+
+    if (project) {
+      revalidatePath(`/works/${project.slug}`);
+    }
+    revalidatePath("/works");
+    revalidatePath("/admin/projects");
+
     return NextResponse.json({ success: true });
-  } catch {
-    return NextResponse.json({ error: "Failed to delete project" }, { status: 500 });
+  } catch (error) {
+    console.error("DELETE /api/projects/[id]:", error);
+    const message = error instanceof Error ? error.message : "Unknown error";
+    return NextResponse.json({ error: "Failed to delete project", detail: message }, { status: 500 });
   }
 }

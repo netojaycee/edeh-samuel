@@ -15,7 +15,7 @@ export default async function DashboardPage() {
 
   const recentProjects = await prisma.project.findMany({
     orderBy: { createdAt: "desc" },
-    take: 15,
+    take: 5,
     select: { id: true, title: true, status: true, createdAt: true },
   });
 
