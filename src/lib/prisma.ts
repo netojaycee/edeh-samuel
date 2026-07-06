@@ -11,6 +11,8 @@ const adapter = new PrismaPg({
   connectionTimeoutMillis: 30000,
   // Release idle connections before Neon suspends them (avoids ETIMEDOUT)
   idleTimeoutMillis: 10000,
+  // Keep TCP connections alive to prevent ETIMEDOUT on stale connections
+  keepAlive: true,
   max: 5,
 });
 
