@@ -30,6 +30,24 @@ export async function PUT(
   try {
     const data = await req.json();
     const slug = slugify(data.title, { lower: true, strict: true });
+    if (data.caseStudy != null && typeof data.caseStudy !== "object") {
+      throw new Error("caseStudy must be an object or null");
+    }
+    if (data.category === "marketing" && data.stats != null) {
+      if (
+        !Array.isArray(data.stats) ||
+        data.stats.length > 3 ||
+        !data.stats.every(
+          (s: unknown) =>
+            s &&
+            typeof s === "object" &&
+            typeof (s as { label?: unknown }).label === "string" &&
+            typeof (s as { value?: unknown }).value === "string"
+        )
+      ) {
+        throw new Error("stats must be an array of up to 3 { label, value } objects");
+      }
+    }
 
     const project = await prisma.project.update({
       where: { id },
@@ -44,6 +62,13 @@ export async function PUT(
         body: data.body,
         status: data.status,
         order: data.order,
+        category: data.category,
+        cardTitle: data.cardTitle,
+        cardDescription: data.cardDescription,
+        stats: data.stats,
+        companyName: data.companyName,
+        companyLogoUrl: data.companyLogoUrl,
+        caseStudy: data.caseStudy,
       },
     });
 

@@ -9,11 +9,12 @@ import { Mail } from "lucide-react";
 
 // Headline broken into segments — highlighted phrases get the primary color
 const segments: { text: string; highlight?: boolean }[] = [
-  { text: "Product Designer specializing in " },
-  { text: "fintech and e-commerce", highlight: true },
-  { text: ". I care about the details that make users feel " },
-  { text: "safe spending, sending, and shopping", highlight: true },
-  { text: " — and the systems that make those details scale." },
+  { text: "I'm a " },
+  { text: "growth marketer", highlight: true },
+  { text: " and " },
+  { text: "strategist", highlight: true },
+  { text: " with a solid background in product design, focused on " },
+  { text: "understanding customers, identifying growth opportunities, and turning insights into practical strategies." },
 ];
 
 // Flatten into per-word tokens for the stagger animation
@@ -107,11 +108,13 @@ export function Hero() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-sm text-muted-foreground leading-relaxed max-w-2xl"
         >
-          I work at the intersection of Product Design and Conversion Rate
-          Optimisation — which means I&apos;m equally comfortable shaping
-          end-to-end user experiences and interrogating why users drop off,
-          hesitate, or don&apos;t come back. I design with intent: every screen,
-          flow, and interaction is built to move people forward.
+          My experience in product design taught me to start with the
+          problem rather than the solution because humans need context to
+          evaluate a problem and need a problem to appreciate a solution.
+          I&apos;ve worked across fintech, SaaS, marketplaces, and
+          e-commerce, conducting user research, mapping customer journeys,
+          fixing growth funnels, improving experiences, and thinking about
+          how product decisions affect conversion and business outcomes.
         </motion.p>
 
         {/* CTA */}
@@ -126,7 +129,7 @@ export function Hero() {
             className="gap-2 rounded-lg px-6"
           >
             <Mail className="w-4 h-4" />
-            Send me a Mail
+            Let&apos;s Talk
           </Button>
         </motion.div>
       </motion.div>

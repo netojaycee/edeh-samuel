@@ -1,9 +1,8 @@
 import { prisma } from "@/lib/prisma";
-import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/home/Hero";
+import { SelectedWorks } from "@/components/home/SelectedWorks";
 import { WorksList } from "@/components/home/WorksList";
-import { WhatsHappening } from "@/components/home/WhatsHappening";
 import { BottomCTA } from "@/components/home/BottomCTA";
 import NavbarServer from "@/components/layout/NavbarServer";
 
@@ -18,7 +17,12 @@ async function getProjects() {
         id: true,
         title: true,
         slug: true,
-        // shortDesc: true,
+        category: true,
+        cardTitle: true,
+        cardDescription: true,
+        stats: true,
+        companyName: true,
+        companyLogoUrl: true,
       },
     });
   } catch {
@@ -28,15 +32,16 @@ async function getProjects() {
 
 export default async function Home() {
   const projects = await getProjects();
-  console.log("projects", projects);
+  const selectedWorks = projects.filter((p) => p.category === "marketing");
+  const previousWork = projects.filter((p) => p.category !== "marketing");
 
   return (
     <>
       <NavbarServer />
       <main>
         <Hero />
-        <WorksList projects={projects} />
-        <WhatsHappening />
+        <SelectedWorks projects={selectedWorks} />
+        <WorksList projects={previousWork} />
         <BottomCTA />
       </main>
       <Footer />

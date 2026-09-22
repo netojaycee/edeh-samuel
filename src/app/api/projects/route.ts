@@ -20,6 +20,13 @@ export async function GET() {
         timeline: true,
         status: true,
         order: true,
+        category: true,
+        cardTitle: true,
+        cardDescription: true,
+        stats: true,
+        companyName: true,
+        companyLogoUrl: true,
+        caseStudy: true,
         createdAt: true,
       },
     });
@@ -30,6 +37,27 @@ export async function GET() {
   }
 }
 
+function validateStats(data: { category?: string; stats?: unknown; caseStudy?: unknown }) {
+  if (data.caseStudy != null && typeof data.caseStudy !== "object") {
+    throw new Error("caseStudy must be an object or null");
+  }
+  if (data.category !== "marketing") return;
+  if (data.stats == null) return;
+  if (
+    !Array.isArray(data.stats) ||
+    data.stats.length > 3 ||
+    !data.stats.every(
+      (s) =>
+        s &&
+        typeof s === "object" &&
+        typeof (s as { label?: unknown }).label === "string" &&
+        typeof (s as { value?: unknown }).value === "string"
+    )
+  ) {
+    throw new Error("stats must be an array of up to 3 { label, value } objects");
+  }
+}
+
 export async function POST(req: NextRequest) {
   const session = await auth();
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -37,6 +65,7 @@ export async function POST(req: NextRequest) {
   try {
     const data = await req.json();
     const slug = slugify(data.title, { lower: true, strict: true });
+    validateStats(data);
 
     const project = await prisma.project.create({
       data: {
@@ -50,6 +79,13 @@ export async function POST(req: NextRequest) {
         body: data.body,
         status: data.status ?? "draft",
         order: data.order ?? 0,
+        category: data.category ?? "marketing",
+        cardTitle: data.cardTitle,
+        cardDescription: data.cardDescription,
+        stats: data.stats,
+        companyName: data.companyName,
+        companyLogoUrl: data.companyLogoUrl,
+        caseStudy: data.caseStudy,
       },
     });
 

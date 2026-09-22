@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { Footer } from "@/components/layout/Footer";
 import { ProjectDetail } from "@/components/project/ProjectDetail";
+import { MarketingCaseStudy } from "@/components/project/MarketingCaseStudy";
 import { BottomCTA } from "@/components/home/BottomCTA";
 import type { Metadata } from "next";
 import NavbarServer from "@/components/layout/NavbarServer";
@@ -40,7 +41,11 @@ export default async function ProjectPage({ params }: Props) {
     <>
       <NavbarServer />
       <main>
-        <ProjectDetail project={project} />
+        {project.category === "marketing" ? (
+          <MarketingCaseStudy project={project} />
+        ) : (
+          <ProjectDetail project={project} />
+        )}
         <BottomCTA />
       </main>
       <Footer />

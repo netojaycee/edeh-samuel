@@ -25,6 +25,13 @@ export default async function EditProjectPage({ params }: Props) {
         body: project.body,
         status: project.status,
         order: project.order,
+        category: project.category,
+        cardTitle: project.cardTitle,
+        cardDescription: project.cardDescription,
+        stats: project.stats,
+        companyName: project.companyName,
+        companyLogoUrl: project.companyLogoUrl,
+        caseStudy: project.caseStudy,
       }}
     />
   );

@@ -44,6 +44,11 @@ export default async function ProjectsPage() {
                 >
                   {project.status}
                 </Badge>
+                <Badge variant="outline" className="text-xs shrink-0">
+                  {project.category === "product-design"
+                    ? "Product Design"
+                    : "Marketing"}
+                </Badge>
               </div>
               {/* <p className="text-xs text-muted-foreground truncate">
                 {project.shortDesc}

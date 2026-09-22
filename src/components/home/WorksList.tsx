@@ -21,15 +21,17 @@ const item = {
 };
 
 export function WorksList({ projects }: WorksListProps) {
+  if (projects.length === 0) return null;
+
   return (
-    <section id="works" className="max-w-2xl mx-auto px-6 pb-16 scroll-mt-20">
+    <section className="max-w-2xl mx-auto px-6 pb-16">
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.4 }}
       >
-        <h2 className="text-2xl font-semibold mb-8">Current &amp; Past Work</h2>
+        <h2 className="text-2xl font-semibold mb-8">Previous Design Work</h2>
       </motion.div>
 
       <motion.ul

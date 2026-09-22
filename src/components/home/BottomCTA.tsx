@@ -19,7 +19,7 @@ export function BottomCTA() {
         className="space-y-6"
       >
         <h2 className="text-2xl sm:text-3xl font-semibold leading-tight max-w-md">
-          Product Design that makes your competition irrelevant...
+          Looking for a marketer who thinks like a product person?
         </h2>
 
         <Button
@@ -27,7 +27,7 @@ export function BottomCTA() {
           className="gap-2 rounded-lg px-6"
         >
           <Mail className="w-4 h-4" />
-          Send me a Mail
+          Let&apos;s Talk
         </Button>
       </motion.div>
 
